@@ -23,6 +23,19 @@ class PlaysController < ApplicationController
     end
   end
   
+  def edit
+    
+  end
+  
+  def update
+    if @play.update(play_params)
+      flash[:notice] = "Details have been updated"
+      redirect_to play_path(@play)
+    else
+      flash[:notice] = "Hmm..unable to save updates"
+      render 'edit'
+    end
+  end
   
   private #private method exclusive to this controller
   
