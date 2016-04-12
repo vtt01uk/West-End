@@ -6,7 +6,8 @@ class PlaysController < ApplicationController
   end
 
   def new
-    @play = Play.new
+    #@play = Play.new
+    @play = current_user.play.build
   end
   
   def show
@@ -14,7 +15,8 @@ class PlaysController < ApplicationController
   end
   
   def create
-    @play = Play.new(play_params)
+    #@play = Play.new(play_params)
+    @play = current_user.play.build(play_params)
     if @play.save
       flash[:notice] = "Play has been added"
       redirect_to root_path
