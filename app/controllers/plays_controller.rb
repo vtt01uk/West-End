@@ -1,5 +1,6 @@
 class PlaysController < ApplicationController
   before_action :find_play, only: [:show, :edit, :update, :destroy]
+  
   def index
     @plays = Play.all.order('created_at DESC')
   end
@@ -37,6 +38,13 @@ class PlaysController < ApplicationController
     end
   end
   
+  def destroy
+    @play.destroy
+    flash[:notice] = "Play has been successfully deleted"
+    redirect_to root_path
+  end
+  
+    
   private #private method exclusive to this controller
   
   def play_params
