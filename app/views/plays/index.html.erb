@@ -1,5 +1,8 @@
-<h1>West End Theatre</h1>
-
-<% @plays.each do |play| %>
+<h1 class="current-categories"><%= params[:category] %> plays | West End Theatre</h1>
+<% if @plays.count == 0 %>
+  <h3>There are no plays in this category</h3>
+<% else %>
+  <% @plays.each do |play| %>
   <h2><%= link_to play.title, play_path(play) %></h2>
-<% end %>
+  <% end %>
+<% end%>
