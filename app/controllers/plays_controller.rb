@@ -6,7 +6,7 @@ class PlaysController < ApplicationController
       @plays = Play.all.order('created_at DESC')
     else
       @category_id = Category.find_by(name: params[:category]).id
-      @plays = Play.where(:category_idj => @category_id).order("created_at DESC")
+      @plays = Play.where(:category_id => @category_id).order('created_at DESC')
     end
   end
 
@@ -16,7 +16,7 @@ class PlaysController < ApplicationController
   def new
     #@play = Play.new
     @play = current_user.plays.build
-    @categories = Category.all.map{ |c| [c.name, c.id] }
+    @categories = Category.all.map { |c| [c.name, c.id] }
   end
   
 
