@@ -1,5 +1,6 @@
 class ReviewsController < ApplicationController
-  before_action :find_play, only: [:new, :create]
+  before_action :find_play
+  
   def new
     @review = Review.new
   end
@@ -10,19 +11,18 @@ class ReviewsController < ApplicationController
     @review.user_id = current_user.id
     
     if @review.save
-      flash[:notice] = "review was added!"
       redirect_to play_path(@play)
     else
       render 'new'
+    end
   end
-    
-  private
   
+  private
   def review_params
     params.require(:review).permit(:rating, :comment)
   end
   
   def find_play
-    Play.find(params[:play_id])
+    @play = Play.find(params[:play_id])
   end
 end

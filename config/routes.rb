@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
-  devise_for :users
+  
   root 'plays#index'
+  
+  devise_for :users
   
   resources :plays do
     resources :reviews
