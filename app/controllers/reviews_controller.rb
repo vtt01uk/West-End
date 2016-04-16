@@ -1,6 +1,7 @@
 class ReviewsController < ApplicationController
-  before_action :find_play, only: [:new, :create]
-  
+  before_action :find_play
+  before_action :find_review, only: [:edit, :update]
+
   def new
     @review = Review.new
   end
@@ -17,6 +18,43 @@ class ReviewsController < ApplicationController
     end
   end
   
+  def edit
+
+  end
+  
+  def update
+
+    if @review.update(review_params)
+      flash[:notice] = "Review has been updated"
+      redirect_to play_path(@play)
+    else
+      render 'edit'
+    end
+  end
+  
+#    def edit
+#    @categories = Category.all.map{ |c| [c.name, c.id] }
+#  end
+#  
+#  def update
+#    @play.category_id = params[:category_id]
+#    
+#    if @play.update(play_params)
+#      flash[:notice] = "Details have been updated"
+#      redirect_to play_path(@play)
+#    else
+#      flash[:notice] = "Hmm..unable to save updates"
+#      render 'edit'
+#    end
+#  end
+#  
+#  def destroy
+#    @play.destroy
+#    flash[:notice] = "Play has been successfully deleted"
+#    redirect_to root_path
+#  end
+#  
+  
   private
   def review_params
     params.require(:review).permit(:rating, :comment)
@@ -24,5 +62,9 @@ class ReviewsController < ApplicationController
   
   def find_play
     @play = Play.find(params[:play_id])
+  end
+  
+  def find_review
+    @review = Review.find(params[:id])
   end
 end
