@@ -24,7 +24,7 @@ class PlaysController < ApplicationController
   def create
     #@play = Play.new(play_params)
     @play = current_user.plays.build(play_params)
-    @play.category_id = play_params[:category_id]
+    @play.category_id = params[:category_id]
     
     if @play.save
       flash[:notice] = "Play has been added"

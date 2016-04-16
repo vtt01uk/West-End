@@ -1,5 +1,5 @@
 class ReviewsController < ApplicationController
-  before_action :find_play
+  before_action :find_play, only: [:new, :create]
   
   def new
     @review = Review.new
@@ -7,7 +7,7 @@ class ReviewsController < ApplicationController
   
   def create
     @review = Review.new(review_params)
-    @review.play_id = @play_id
+    @review.play_id = @play.id
     @review.user_id = current_user.id
     
     if @review.save
