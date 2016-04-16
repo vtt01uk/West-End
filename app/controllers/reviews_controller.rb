@@ -1,6 +1,6 @@
 class ReviewsController < ApplicationController
   before_action :find_play
-  before_action :find_review, only: [:edit, :update]
+  before_action :find_review, only: [:edit, :update, :destroy]
 
   def new
     @review = Review.new
@@ -31,29 +31,12 @@ class ReviewsController < ApplicationController
       render 'edit'
     end
   end
-  
-#    def edit
-#    @categories = Category.all.map{ |c| [c.name, c.id] }
-#  end
-#  
-#  def update
-#    @play.category_id = params[:category_id]
-#    
-#    if @play.update(play_params)
-#      flash[:notice] = "Details have been updated"
-#      redirect_to play_path(@play)
-#    else
-#      flash[:notice] = "Hmm..unable to save updates"
-#      render 'edit'
-#    end
-#  end
-#  
-#  def destroy
-#    @play.destroy
-#    flash[:notice] = "Play has been successfully deleted"
-#    redirect_to root_path
-#  end
-#  
+ 
+  def destroy
+    @review.destroy
+    flash[:notice] = "Review was been successfully deleted"
+    redirect_to play_path(@play)
+  end
   
   private
   def review_params

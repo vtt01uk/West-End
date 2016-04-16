@@ -5,6 +5,7 @@
     <% if review.user_id == current_user.id %>
       <div class="links btn-group">
         <%= link_to "Edit", edit_play_review_path(review.play, review), class: "btn btn-custom" %>
+        <%= link_to "Delete", play_review_path(review.play, review), class: "btn btn-custom", method: :delete, data: { confirm: "Are you sure?" } %>
       </div>
     <% end %>
   <% end %>
